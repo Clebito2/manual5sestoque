@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual 5S Completo - Casa Goianita | Gestão de Estoque e Operações</title>
+    
+    <!-- Fontes do Sistema de Design -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Tokens CSS - Sistema de Design Live Consultoria */
+        :root {
+            /* Paleta Principal */
+            --primary-bg: #06192a;
+            --card-bg: #0A243D;
+            --accent-color: #00e800;
+            
+            /* Textos */
+            --text-primary: #ffffff;
+            --text-muted: #cccccc;
+            --text-subtle: #a0a0a0;
+            
+            /* Bordas e Efeitos */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-glow: 0 0 8px rgba(0, 232, 0, 0.7);
+            
+            /* Tipografia */
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Merriweather', serif;
+            --font-size-base: 1.1rem;
+            --font-size-h3: 1.5rem;
+            --font-size-h2: clamp(2rem, 4vw, 2.5rem);
+            --font-size-h1: clamp(2.5rem, 5vw, 3rem);
+            
+            /* Espaçamento */
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 6rem;
+        }
+
+        /* Reset e Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--primary-bg);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-attachment: fixed;
+        }
+
+        /* Header Fixo */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(6, 25, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--space-sm);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .header-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: var(--space-md) var(--space-sm);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Componente Card */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
+                        0 0 20px rgba(0, 232, 0, 0.1);
+        }
+
+        .card:focus-visible {
+            outline: 3px solid var(--accent-color);
+        }
+
+        /* Card de Diagnóstico Especial */
+        .card-diagnostico {
+            border-left: 3px solid var(--accent-color);
+            font-family: var(--font-secondary);
+        }
+
+        /* Card de Processo */
+        .card-processo {
+            border-left: 4px solid #ff6b35;
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(255, 107, 53, 0.05) 100%);
+        }
+
+        /* Tipografia */
+        h1 {
+            font-size: var(--font-size-h1);
+            color: var(--accent-color);
+            margin-bottom: var(--space-md);
+            text-align: center;
+            text-shadow: var(--accent-glow);
+        }
+
+        h2 {
+            font-size: var(--font-size-h2);
+            color: var(--accent-color);
+            margin: var(--space-lg) 0 var(--space-md) 0;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: var(--space-sm);
+        }
+
+        h3 {
+            font-size: var(--font-size-h3);
+            color: var(--text-primary);
+            margin: var(--space-md) 0 var(--space-sm) 0;
+        }
+
+        h4 {
+            font-size: 1.3rem;
+            color: #ff6b35;
+            margin: var(--space-md) 0 var(--space-sm) 0;
+        }
+
+        p {
+            color: var(--text-subtle);
+            margin-bottom: var(--space-sm);
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Tabelas */
+        .table-container {
+            overflow-x: auto;
+            margin: var(--space-md) 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: var(--space-sm);
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: rgba(0, 232, 0, 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-muted);
+        }
+
+        /* Tabela de Processo */
+        .process-table th {
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+        }
+
+        /* Linha do Tempo Vertical */
+        .timeline {
+            position: relative;
+            padding: var(--space-md) 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-color);
+            box-shadow: var(--accent-glow);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--space-lg);
+            padding-left: var(--space-xl);
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(even) {
+            transform: translateX(50px);
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -45px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            box-shadow: var(--accent-glow);
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: var(--space-md);
+        }
+
+        .timeline-title {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Badges e Destacues */
+        .badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0.2rem;
+        }
+
+        .badge-processo {
+            background: #ff6b35;
+        }
+
+        .highlight-box {
+            background: rgba(0, 232, 0, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            padding: var(--space-sm);
+            margin: var(--space-sm) 0;
+        }
+
+        .highlight-box-processo {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #ff6b35;
+        }
+
+        .highlight-box .icon {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Lista de Etapas */
+        .steps-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .steps-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-lg);
+            margin-bottom: var(--space-sm);
+            background: rgba(0, 232, 0, 0.05);
+            border-left: 3px solid var(--accent-color);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .steps-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: var(--space-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Lista de Processo */
+        .process-steps {
+            counter-reset: process-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .process-steps li {
+            counter-increment: process-counter;
+            position: relative;
+            padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-lg);
+            margin-bottom: var(--space-sm);
+            background: rgba(255, 107, 53, 0.05);
+            border-left: 3px solid #ff6b35;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .process-steps li::before {
+            content: counter(process-counter);
+            position: absolute;
+            left: var(--space-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff6b35;
+            color: var(--primary-bg);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Seções de Processo */
+        .processo-section {
+            border-left: 4px solid #ff6b35;
+            padding-left: var(--space-md);
+            margin: var(--space-lg) 0;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Responsividade */
+        @media (min-width: 768px) {
+            main {
+                padding: var(--space-lg) var(--space-md);
+            }
+            
+            .timeline::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .timeline-item {
+                width: 45%;
+                padding-left: 0;
+                padding-right: var(--space-md);
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 55%;
+                padding-left: var(--space-md);
+                padding-right: 0;
+            }
+            
+            .timeline-item::before {
+                left: auto;
+                right: -10px;
+            }
+            
+            .timeline-item:nth-child(even)::before {
+                left: -10px;
+                right: auto;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: var(--space-lg) var(--space-md);
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+
+        .footer-logo {
+            height: 60px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Navegação interna */
+        .nav-menu {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: var(--space-sm);
+            z-index: 999;
+            display: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .nav-menu a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a:focus {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+        }
+
+        @media (min-width: 1024px) {
+            .nav-menu {
+                display: block;
+            }
+        }
+
+        /* Destaque de valor */
+        .value-highlight {
+            background: linear-gradient(135deg, rgba(0, 232, 0, 0.1) 0%, rgba(0, 232, 0, 0.05) 100%);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+            text-align: center;
+        }
+
+        .value-highlight h3 {
+            color: var(--accent-color);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Estilos para impressão */
+        @media print {
+            @page {
+                margin: 1cm;
+            }
+            
+            header, .nav-menu, footer, button {
+                display: none !important;
+            }
+            
+            main {
+                margin-top: 0 !important;
+            }
+            
+            .card {
+                break-inside: avoid;
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+            }
+            
+            .timeline-item {
+                break-inside: avoid;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            h1, h2, h3, h4 {
+                color: black !important;
+            }
+            
+            .badge {
+                background: #ccc !important;
+                color: black !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Fixo -->
+    <header>
+        <img src="https://raw.githubusercontent.com/Clebito2/layout/main/Logo%20live%20oficial-36.png" 
+             alt="Logo Live Consultoria" class="logo" loading="lazy">
+        <div class="header-title">Manual 5S Completo - Casa Goianita</div>
+    </header>
+
+    <!-- Navegação Lateral -->
+    <nav class="nav-menu">
+        <a href="#introducao">Introdução</a>
+        <a href="#metodologia">Metodologia</a>
+        <a href="#plano">Plano de Jogo</a>
+        <a href="#aquisicao">Aquisição</a>
+        <a href="#aplicacao">Aplicação 5S</a>
+        <a href="#saida">Saída de Estoque</a>
+        <a href="#gestao">Gestão</a>
+        <a href="#resumo">Resumo</a>
+    </nav>
+
+    <main>
+        <!-- Seção de Introdução -->
+        <section id="introducao" class="fade-in">
+            <h1>Manual Completo 5S: Gestão de Estoque Casa Goianita</h1>
+            
+            <div class="card card-diagnostico">
+                <h2>Prezado(a) Estoquista!</h2>
+                <p>Com grande prazer, apresentamos o manual completo de gestão do estoque, integrando as rotinas operacionais cruciais de <strong>Compras</strong> e <strong>Vendas/Retirada</strong>, sempre sob a ótica da excelência e disciplina promovida pela metodologia 5S.</p>
+                
+                <div class="value-highlight">
+                    <h3>Nosso Desafio</h3>
+                    <p>A gestão eficiente do estoque de utilidades domésticas, com grande variedade de itens (de <strong>faqueiros de R$ 5.000 a pipoqueiras de R$ 40</strong>), requer um processo robusto que minimize desperdícios (custo) e maximize o valor para o cliente (qualidade e disponibilidade).</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <span class="icon">📋</span>
+                    <strong>Estrutura do Manual:</strong> O processo está dividido em três macroetapas: <em>Aquisição</em> (Integração 5S e Compras), <em>Gestão Operacional</em> (5S por Senso) e <em>Saída de Estoque</em> (Vendas e Transferências).
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção da Metodologia -->
+        <section id="metodologia" class="fade-in">
+            <h2>O que é a Metodologia 5S?</h2>
+            
+            <div class="card">
+                <p>O nome 5S vem de cinco palavras japonesas que definem as cinco etapas do processo. No Brasil, adaptamos essas palavras para cinco "Sensos", pois eles representam uma mudança de comportamento e atitude.</p>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>S (Japonês)</th>
+                                <th>Senso (Português)</th>
+                                <th>Objetivo Principal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Seiri</strong></td>
+                                <td>Senso de <strong>Utilização</strong> / Descarte</td>
+                                <td>Identificar e eliminar tudo o que é desnecessário no estoque.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Seiton</strong></td>
+                                <td>Senso de <strong>Ordenação</strong> / Organização</td>
+                                <td>Encontrar e definir o lugar certo para cada coisa.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Seisou</strong></td>
+                                <td>Senso de <strong>Limpeza</strong></td>
+                                <td>Manter o ambiente limpo e descobrir <em>por que</em> ele suja.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Seiketsu</strong></td>
+                                <td>Senso de <strong>Padronização</strong> / Saúde</td>
+                                <td>Criar regras e padrões para manter organização e limpeza.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Shitsuke</strong></td>
+                                <td>Senso de <strong>Disciplina</strong> / Autodisciplina</td>
+                                <td>Transformar o 5S em hábito, garantindo melhoria contínua.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção do Plano de Jogo -->
+        <section id="plano" class="fade-in">
+            <h2>Como Este Programa Funciona (Nosso Plano de Jogo)</h2>
+            
+            <div class="card">
+                <p>Para que o 5S funcione, ele precisa ser um projeto de toda a empresa, e não uma tarefa isolada. Por isso, a implantação segue alguns passos iniciais liderados pela gestão.</p>
+                
+                <ol class="steps-list">
+                    <li>
+                        <strong>Formação da Equipe de Implantação e Engajamento da Liderança</strong>
+                        <p>A diretoria e a liderança estão 100% envolvidas. Uma equipe com pessoas de diferentes setores foi formada com papéis bem definidos.</p>
+                    </li>
+                    <li>
+                        <strong>Treinamento e Conscientização (O que estamos fazendo agora!)</strong>
+                        <p>Todos na empresa, do administrativo ao estoque, devem ser treinados. A cultura não pode ser implementada pela metade.</p>
+                    </li>
+                    <li>
+                        <strong>Pré-Trabalho (Análise da Situação Atual)</strong>
+                        <p>Registramos como o estoque está hoje, fotografando todas as áreas para comparar com o depois e celebrar nossas conquistas.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Seção de Aquisição e Recebimento -->
+        <section id="aquisicao" class="fade-in">
+            <h2>I. Aquisição e Recebimento de Produtos (Processo de Compras)</h2>
+            
+            <div class="card card-processo">
+                <p>Este processo visa garantir que apenas o material necessário seja adquirido (Seiri) e que seu recebimento e cadastramento sejam padronizados (Seiketsu).</p>
+            </div>
+
+            <div class="processo-section">
+                <h4>A. Senso de Utilização (Seiri) no Planejamento de Compras</h4>
+                
+                <div class="card">
+                    <p>O Seiri atua na fase de planejamento, garantindo que não se compre em excesso ou produtos desnecessários, otimizando o fluxo de caixa.</p>
+                    
+                    <div class="table-container">
+                        <table class="process-table">
+                            <thead>
+                                <tr>
+                                    <th>Passo</th>
+                                    <th>Detalhamento da Tarefa (Como Implantar)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Identificação da Necessidade</strong></td>
+                                    <td>A compra é disparada pelo acompanhamento de produtos com maior giro (ex: faqueiro, taças), solicitações de gerentes/vendedores sobre itens em falta, ou análise de promoções de fornecedores.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Consulta ao Histórico de Vendas</strong></td>
+                                    <td>Utilize o sistema para gerar um relatório de vendas (ex: últimos dois meses) por segmento (ex: Eletrodomésticos, Inox). Esta análise deve ser padronizada para informar o que realmente vendeu.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Definição do Estoque Mínimo</strong></td>
+                                    <td><strong>Atenção:</strong> Para atingir o Seiketsu (Padronização), é crucial definir e alimentar o estoque mínimo (stock regulador) no sistema. Use os relatórios de venda para definir esse nível. O sistema deve alertar quando o item estiver abaixo do mínimo.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h4>B. Rotina de Cotação e Pedido (O que é Necessário)</h4>
+                
+                <div class="card">
+                    <p>O processo de cotação deve ser rigoroso para garantir o menor custo.</p>
+                    
+                    <div class="table-container">
+                        <table class="process-table">
+                            <thead>
+                                <tr>
+                                    <th>Passo</th>
+                                    <th>Detalhamento da Tarefa (Como Implantar)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>4. Cotação de Preços</strong></td>
+                                    <td>
+                                        <strong>Registro Inicial:</strong> Anote os produtos e quantidades desejadas.<br>
+                                        <strong>Múltiplas Fontes:</strong> Realize cotações com múltiplos fornecedores/distribuidores (e-mail, WhatsApp, websites). Isso minimiza o desperdício financeiro.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5. Fechamento e Autorização</strong></td>
+                                    <td>Confirme o orçamento, verificando preços, prazos e forma de pagamento (à vista, cartão, prazo, duplicata).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6. Rodagem do Pedido</strong></td>
+                                    <td>
+                                        <strong>Cadastramento Detalhado:</strong> Digite manualmente o código do produto, quantidade, preço unitário de custo, IPI, e custo interno (ex: 11,5%).<br>
+                                        <strong>Formação do Preço de Venda:</strong> Calcule o preço mínimo aplicando o índice de marcação (ex: 205%). Este processo é vital para a precisão dos preços e para o Seiketsu.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h4>C. Recebimento e Conferência (Organização e Limpeza)</h4>
+                
+                <div class="card">
+                    <p>O recebimento é onde o Seisou (Limpeza/Inspeção) e o Seiton (Ordenação) se encontram, garantindo que o que foi comprado realmente chegou e que não há avarias.</p>
+                    
+                    <ol class="process-steps">
+                        <li>
+                            <strong>Recebimento Físico e Nota Fiscal</strong>
+                            <p>O estoquista recebe a mercadoria e a nota fiscal do fornecedor.</p>
+                        </li>
+                        <li>
+                            <strong>Geração do Relatório de Entrada</strong>
+                            <p>No sistema, o estoquista abre a tela de entrada de mercadoria, insere o fornecedor e o número da nota fiscal. O sistema gera um relatório com a descrição e referência dos produtos, mas com o campo de quantidade vazio para conferência.</p>
+                        </li>
+                        <li>
+                            <strong>Conferência Física e Relatório</strong>
+                            <p>O estoquista abre as caixas, conta os itens e preenche manualmente a quantidade no relatório impresso.</p>
+                            <div class="highlight-box highlight-box-processo">
+                                <span class="icon">💡</span>
+                                <strong>Recomendação de Melhoria 5S:</strong> A conferência via leitor de código de barras seria mais rápida e menos propensa a erros, otimizando o processo (Kaizen).
+                            </div>
+                        </li>
+                        <li>
+                            <strong>Análise de Avarias (Seisou como Inspeção)</strong>
+                            <p>O estoquista anota no relatório se houve quebras, avarias, faltas ou excessos. Para eletrodomésticos, são testados após a venda. Para taças/porcelana, quebras são frequentes. Este ato de inspecionar é o Seisou.</p>
+                        </li>
+                        <li>
+                            <strong>Conferência Final e Entrada no Estoque</strong>
+                            <p>O relatório manual é passado ao gestor (Curuca), que o confere contra a nota fiscal. Se houver erro, o estoquista deve ser chamado para reconfirmar. A entrada final no sistema é dada pelo gestor, atualizando o estoque.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Aplicação dos 5S -->
+        <section id="aplicacao" class="fade-in">
+            <h2>II. Gestão Operacional do Estoque (Os 5S Detalhados)</h2>
+            
+            <div class="highlight-box">
+                <span class="icon">⚠️</span>
+                <strong>A excelência em 5S no depósito garante a segurança e a organização necessária para a movimentação rápida de utilidades domésticas (muitas vezes frágeis).</strong>
+            </div>
+
+            <!-- Timeline dos 5S -->
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">S1: Seiri (Senso de Utilização)</div>
+                        <span class="badge">Retirada do Inútil</span>
+                        
+                        <p><strong>Objetivo:</strong> O Seiri busca liberar espaço e focar no que agrega valor.</p>
+                        
+                        <ul>
+                            <li><strong>Destinação de Quebras e Avarias:</strong> Separe imediatamente itens quebrados ou avariados</li>
+                            <li><strong>Acionamento de Fornecedor:</strong> Para produtos novos com avaria, tire fotos e contacte o fornecedor para reposição ou reembolso</li>
+                            <li><strong>Venda de Peças Únicas:</strong> Se itens de conjuntos (ex: taças) quebrarem parcialmente, o gestor deve criar um novo código para a venda unitária do restante</li>
+                            <li><strong>Ponto Estoque:</strong> Mantenha um local para itens parcialmente quebrados que podem ser vendidos com grande desconto para recuperar o custo</li>
+                            <li><strong>Gestão de Itens Lentos:</strong> Identifique e remova itens que não giram, liberando prateleiras para os itens de alta rotatividade</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">S2: Seiton (Senso de Ordenação)</div>
+                        <span class="badge">Otimização de Movimento</span>
+                        
+                        <p><strong>Objetivo:</strong> O Seiton visa posicionar os materiais para otimizar tempo e movimento.</p>
+                        
+                        <ul>
+                            <li><strong>Layout Otimizado:</strong> Posicione itens de alta rotatividade (faqueiros, taças, eletrodomésticos comuns) em locais de fácil acesso. Itens de uso esporádico (como itens exclusivos da loja 135) podem ir para áreas de menor acesso</li>
+                            <li><strong>Identificação Visual:</strong> Utilize etiquetas, placas ou cores nas prateleiras e corredores. Qualquer pessoa deve ser capaz de localizar um item facilmente</li>
+                            <li><strong>Padronização FIFO:</strong> Siga o princípio First In, First Out para consumo dos itens mais velhos primeiro</li>
+                        </ul>
+                        
+                        <div class="highlight-box">
+                            <span class="icon">📍</span>
+                            <strong>Localização Mapeada (Aprimoramento 5S):</strong> Implemente um sistema de Locação de Mercadoria no depósito (utilizando coletores, como existe na loja 135). Isso garante que o vendedor/estoquista encontre o item na primeira tentativa.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">S3: Seisou (Senso de Limpeza)</div>
+                        <span class="badge">Limpeza e Prevenção</span>
+                        
+                        <p><strong>Objetivo:</strong> O Seisou transforma a limpeza em uma ferramenta de inspeção.</p>
+                        
+                        <ul>
+                            <li><strong>Responsabilidade Coletiva:</strong> A limpeza é responsabilidade de todos os colaboradores, não apenas de uma equipe específica</li>
+                            <li><strong>Combate às Fontes de Sujeira:</strong> Identifique e elimine as rotinas que causam acúmulo de poeira ou resíduos no depósito. Isso pode incluir o descarte imediato de embalagens vazias e a manutenção de um ambiente adequado (boa ventilação, iluminação)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">S4: Seiketsu (Senso de Padronização)</div>
+                        <span class="badge">Sustentando os 3S</span>
+                        
+                        <p><strong>Objetivo:</strong> Este Senso fixa os padrões alcançados e promove a saúde e segurança.</p>
+                        
+                        <ul>
+                            <li><strong>Padronização de Processos:</strong> Garanta que todos os colaboradores envolvidos no processo de compras e estoque utilizem o sistema e os códigos de forma consistente</li>
+                            <li><strong>Procedimentos de Transferência:</strong> Mantenha o procedimento de transferência (acessível apenas ao gerente ou estoquista) padronizado para todas as lojas</li>
+                            <li><strong>Foco na Saúde:</strong> Zele pelo bem-estar físico e mental, incluindo a manutenção de áreas comuns limpas e o uso adequado de EPIs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-title">S5: Shitsuke (Senso de Disciplina)</div>
+                        <span class="badge">A Ordem Mantida</span>
+                        
+                        <p><strong>Objetivo:</strong> O Shitsuke é a base para a sustentabilidade. Envolve o desenvolvimento da autodisciplina para cumprir regras e procedimentos.</p>
+                        
+                        <ul>
+                            <li><strong>Cultura de Cumprimento:</strong> A equipe deve ter o hábito de fazer o que é correto e padronizado, sem a necessidade de fiscalização constante</li>
+                            <li><strong>Monitoramento e Auditoria:</strong> Implemente um sistema de monitoramento para verificar a aderência aos padrões</li>
+                            <li><strong>Melhoria Contínua (Kaizen):</strong> Estimule os colaboradores a buscar constantemente melhorias, identificando problemas e propondo planos de ação</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Saída de Estoque -->
+        <section id="saida" class="fade-in">
+            <h2>III. Saída de Estoque (Vendas e Transferências)</h2>
+            
+            <div class="card card-processo">
+                <p>Este processo descreve como o sistema e a logística lidam com a movimentação da mercadoria, desde a venda até a entrega ou transferência.</p>
+            </div>
+
+            <div class="processo-section">
+                <h4>A. Venda e Retirada Automática do Estoque</h4>
+                
+                <div class="card">
+                    <div class="table-container">
+                        <table class="process-table">
+                            <thead>
+                                <tr>
+                                    <th>Passo</th>
+                                    <th>Detalhamento da Tarefa (Como Implantar)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Início da Venda e Consulta de Estoque</strong></td>
+                                    <td>O vendedor (com sua senha) abre a tela de vendas (F2). Ao digitar o código do produto e a quantidade, o sistema consulta automaticamente o estoque total da rede (lojas 1, 2 e 4).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Negociação e Desconto</strong></td>
+                                    <td>O vendedor pode oferecer um desconto padrão de 5% (F5) em condições como pagamento à vista (Pix, débito) ou em grandes volumes (atacado). Se o produto já estiver em oferta, o desconto não se aplica automaticamente.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Finalização da Venda e Cadastro</strong></td>
+                                    <td>O vendedor finaliza a venda (F12). O cliente é cadastrado apenas se solicitar nota eletrônica, devido à resistência anterior a cadastros completos.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. Retirada e Conferência</strong></td>
+                                    <td>Após o cliente ir ao caixa, o vendedor separa a mercadoria para conferência e embalagem. O sistema dá baixa no estoque automaticamente após a finalização da venda.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h4>B. Movimentação de Estoque: Transferência Interlojas</h4>
+                
+                <div class="card">
+                    <p>Quando um cliente deseja uma quantidade que não está disponível na loja (ex: quer 36, mas só tem 24), é necessário solicitar a transferência.</p>
+                    
+                    <ol class="process-steps">
+                        <li>
+                            <strong>Solicitação e Confirmação (Manual)</strong>
+                            <p>O vendedor liga para a outra filial para confirmar a disponibilidade do estoque, pois o estoque online pode não ser 100% confiável.</p>
+                        </li>
+                        <li>
+                            <strong>Lançamento da Transferência (Gerente/Estoquista)</strong>
+                            <p>O lançamento é feito no sistema (Menu: Suprimentos > Movimento > Transferência).</p>
+                            <ul>
+                                <li><strong>Registro:</strong> O responsável insere o código do produto, a filial de destino (ex: 1, 2, 4) e a quantidade</li>
+                                <li><strong>Aviso:</strong> O sistema dá baixa no estoque de origem e entrada no estoque de destino imediatamente</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Logística Física</strong>
+                            <p>O veículo de transporte passa diariamente entre as lojas (85, 135, T4) para recolher e entregar as mercadorias transferidas.</p>
+                        </li>
+                        <li>
+                            <strong>Retirada pelo Cliente</strong>
+                            <p>Se o cliente for buscar a mercadoria transferida em outra filial, o estoquista/gerente da loja de origem imprime um relatório de transferência. O cliente pode ir buscar imediatamente, pois a mercadoria já está separada e o estoque já foi atualizado.</p>
+                        </li>
+                        <li>
+                            <strong>Entregas (Delivery)</strong>
+                            <p>Para entregas (seja por volume grande, por conveniência ou lista de casamento), o vendedor preenche um borderô no sistema (Controle + 1) com informações logísticas (nome do entregador – terceirizado ou da loja, endereço, dados do cliente/presenteado).</p>
+                        </li>
+                    </ol>
+                </div>
+
+                <h4>C. Manutenção do Estoque Virtual (Sistema)</h4>
+                
+                <div class="card">
+                    <p>Embora o processo de entrada e transferência seja manual, garantir a precisão dos dados é um imperativo do Seiketsu.</p>
+                    
+                    <ul>
+                        <li><strong>Correção de Códigos:</strong> O gestor (Curuca) é o responsável por criar novos códigos (ex: para venda unitária de peças de um kit quebrado), garantindo que o produto possa ser vendido e rastreado no sistema</li>
+                        <li><strong>Digitalização e Rastreabilidade:</strong> O controle de todos os pedidos, notas fiscais e avarias é mantido pelo gestor (em arquivos físicos e no sistema), permitindo a rastreabilidade e a resolução de pendências com fornecedores</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Gestão do Processo -->
+        <section id="gestao" class="fade-in">
+            <h2>Como Garantimos que o 5S Continue Funcionando</h2>
+            
+            <div class="card">
+                <h3>Acompanhamento e Auditoria (Monitoria)</h3>
+                <p>O monitoramento verifica se os resultados estão bons e se as pessoas estão executando as tarefas conforme o padrão.</p>
+                
+                <ul class="steps-list">
+                    <li>
+                        <strong>Equipe de Auditoria:</strong> Forme uma equipe de implantação/monitoramento com, no mínimo, 3 pessoas de setores diferentes
+                    </li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Melhoria Contínua (Kaizen)</h3>
+                <p>O 5S funciona junto com a filosofia Lean (que busca eliminar desperdícios). Por isso, o processo nunca termina.</p>
+                
+                <div class="highlight-box">
+                    <span class="icon">🔄</span>
+                    <strong>Revisão dos Padrões:</strong> Usando dados da monitoria, identificamos problemas e oportunidades para definir planos de ação.
+                </div>
+                
+                <ul class="steps-list">
+                    <li>
+                        <strong>Análise de Dados:</strong> Use os resultados das auditorias para identificar pontos de melhoria e problemas recorrentes
+                    </li>
+                    <li>
+                        <strong>Planos de Ação:</strong> Desenvolva ações corretivas específicas para cada problema identificado
+                    </li>
+                    <li>
+                        <strong>Avanço Constante:</strong> Estimule todos a pensar em maneiras de alcançar resultados ainda melhores a cada dia
+                    </li>
+                    <li>
+                        <strong>Cultura de Melhoria:</strong> Transforme a busca por melhorias em um hábito natural de toda a equipe
+                    </li>
+                </ul>
+                
+                <div class="value-highlight">
+                    <h3>Resultado Final</h3>
+                    <p>Ao detalhar e padronizar cada uma dessas etapas operacionais e de controle, aliando-as aos Sensos do 5S, a organização garante não apenas um estoque limpo, mas um processo de aquisição e venda <strong>ágil, seguro e com custos otimizados</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Resumo Executivo -->
+        <section id="resumo" class="fade-in">
+            <h2>Resumo Executivo: Benefícios do 5S Integrado</h2>
+            
+            <div class="card">
+                <h3>Benefícios Operacionais Esperados</h3>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Área de Impacto</th>
+                                <th>Benefícios Específicos</th>
+                                <th>Indicadores de Sucesso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Compras</strong></td>
+                                <td>Redução de compras desnecessárias, melhor negociação de preços, controle de estoque mínimo</td>
+                                <td>Redução de 15% no capital imobilizado em estoque</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Estoque</strong></td>
+                                <td>Localização rápida de produtos, redução de quebras, otimização do espaço</td>
+                                <td>Tempo de separação reduzido em 50%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vendas</strong></td>
+                                <td>Maior disponibilidade de produtos, atendimento mais rápido, redução de transferências</td>
+                                <td>Aumento de 20% na satisfação do cliente</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Financeiro</strong></td>
+                                <td>Redução de perdas, melhor giro de estoque, otimização do fluxo de caixa</td>
+                                <td>Redução de 25% nas perdas por avarias</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Cronograma de Implantação</h3>
+                
+                <ol class="steps-list">
+                    <li>
+                        <strong>Semana 1-2: Treinamento e Preparação</strong>
+                        <p>Capacitação da equipe, registro fotográfico da situação atual, definição de responsabilidades</p>
+                    </li>
+                    <li>
+                        <strong>Semana 3-4: Aplicação S1 e S2</strong>
+                        <p>Descarte de itens desnecessários, reorganização do layout, implementação da identificação visual</p>
+                    </li>
+                    <li>
+                        <strong>Semana 5-6: Aplicação S3 e S4</strong>
+                        <p>Estabelecimento de rotinas de limpeza, padronização de processos, criação de procedimentos</p>
+                    </li>
+                    <li>
+                        <strong>Semana 7-8: Aplicação S5 e Consolidação</strong>
+                        <p>Implementação do sistema de auditoria, início do monitoramento, ajustes finais</p>
+                    </li>
+                    <li>
+                        <strong>A partir da Semana 9: Sustentação</strong>
+                        <p>Auditorias semanais, melhorias contínuas, expansão para outras áreas</p>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>Palavras Finais</h3>
+                <p>Este manual representa mais que um conjunto de procedimentos - é um convite para transformarmos nossa cultura organizacional. Cada colaborador é um agente de mudança, responsável por manter e aprimorar continuamente nosso ambiente de trabalho.</p>
+                
+                <div class="highlight-box">
+                    <span class="icon">🎯</span>
+                    <strong>Lembre-se:</strong> O 5S não é um projeto com início, meio e fim. É uma jornada contínua de excelência que beneficia a todos: empresa, colaboradores e clientes.
+                </div>
+                
+                <p>Juntos, vamos transformar a Casa Goianita em um exemplo de organização, eficiência e qualidade no varejo de utilidades domésticas.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <img src="https://raw.githubusercontent.com/Clebito2/layout/main/Logo%20live%20oficial-34.png" 
+             alt="Logo Live Consultoria" class="footer-logo" loading="lazy">
+        <p class="footer-text">
+            Manual desenvolvido pela Live Consultoria para a Casa Goianita<br>
+            Transformando ambientes de trabalho através da metodologia 5S integrada às operações<br>
+            <strong>Versão 1.0 - 2024</strong>
+        </p>
+    </footer>
+
+    <script>
+        // Intersection Observer para animações
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas as seções
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll para navegação
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const headerHeight = 80;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Destacar seção ativa na navegação
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.background = '';
+                link.style.color = '';
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.style.background = 'var(--accent-color)';
+                    link.style.color = 'var(--primary-bg)';
+                }
+            });
+        });
+
+        // Adicionar loading lazy para melhor performance
+        document.querySelectorAll('img').forEach(img => {
+            if (!img.hasAttribute('loading')) {
+                img.setAttribute('loading', 'lazy');
+            }
+        });
+
+        // Funcionalidade de impressão
+        function printManual() {
+            window.print();
+        }
+
+        // Adicionar botão de impressão
+        const printButton = document.createElement('button');
+        printButton.innerHTML = '🖨️ Imprimir Manual';
+        printButton.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 232, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        `;
+        
+        printButton.addEventListener('click', printManual);
+        printButton.addEventListener('mouseenter', () => {
+            printButton.style.transform = 'scale(1.05)';
+            printButton.style.boxShadow = '0 6px 20px rgba(0, 232, 0, 0.4)';
+        });
+        printButton.addEventListener('mouseleave', () => {
+            printButton.style.transform = 'scale(1)';
+            printButton.style.boxShadow = '0 4px 15px rgba(0, 232, 0, 0.3)';
+        });
+        
+        document.body.appendChild(printButton);
+
+        // Funcionalidade de busca rápida
+        function addSearchFunctionality() {
+            const searchInput = document.createElement('input');
+            searchInput.type = 'text';
+            searchInput.placeholder = 'Buscar no manual... (Ctrl+F)';
+            searchInput.style.cssText = `
+                position: fixed;
+                top: 90px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 10px 15px;
+                border: 1px solid var(--border-color);
+                border-radius: 25px;
+                background: var(--card-bg);
+                color: var(--text-primary);
+                width: 300px;
+                z-index: 1002;
+                display: none;
+                font-family: var(--font-primary);
+            `;
+            
+            document.body.appendChild(searchInput);
+            
+            // Toggle busca com Ctrl+F
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === 'f') {
+                    e.preventDefault();
+                    searchInput.style.display = searchInput.style.display === 'none' ? 'block' : 'none';
+                    if (searchInput.style.display === 'block') {
+                        searchInput.focus();
+                    }
+                }
+                
+                // Fechar busca com ESC
+                if (e.key === 'Escape') {
+                    searchInput.style.display = 'none';
+                    searchInput.value = '';
+                    // Limpar highlights
+                    document.querySelectorAll('.search-highlight').forEach(el => {
+                        el.classList.remove('search-highlight');
+                    });
+                }
+            });
+            
+            // Funcionalidade de busca
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                
+                // Limpar highlights anteriores
+                document.querySelectorAll('.search-highlight').forEach(el => {
+                    el.classList.remove('search-highlight');
+                });
+                
+                if (searchTerm.length > 2) {
+                    const allText = document.querySelectorAll('p, li, td, th, h1, h2, h3, h4');
+                    
+                    allText.forEach(element => {
+                        const text = element.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            element.classList.add('search-highlight');
+                        }
+                    });
+                }
+            });
+            
+            // Adicionar estilo para highlight
+            const style = document.createElement('style');
+            style.textContent = `
+                .search-highlight {
+                    background-color: rgba(0, 232, 0, 0.3) !important;
+                    transition: background-color 0.3s ease;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        addSearchFunctionality();
+
+        // Adicionar contador de progresso de leitura
+        function addProgressBar() {
+            const progressBar = document.createElement('div');
+            progressBar.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 3px;
+                background: linear-gradient(90deg, var(--accent-color), #00ff00);
+                z-index: 1003;
+                transition: width 0.3s ease;
+                box-shadow: var(--accent-glow);
+            `;
+            
+            document.body.appendChild(progressBar);
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.body.offsetHeight - window.innerHeight;
+                const scrollPercent = Math.min((scrollTop / docHeight) * 100, 100);
+                progressBar.style.width = scrollPercent + '%';
+            });
+        }
+        
+        addProgressBar();
+
+        // Adicionar funcionalidade de voltar ao topo
+        function addBackToTop() {
+            const backToTopButton = document.createElement('button');
+            backToTopButton.innerHTML = '⬆️';
+            backToTopButton.title = 'Voltar ao topo';
+            backToTopButton.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                right: 20px;
+                background: var(--card-bg);
+                color: var(--accent-color);
+                border: 1px solid var(--accent-color);
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 1001;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            document.body.appendChild(backToTopButton);
+            
+            // Mostrar/esconder botão baseado no scroll
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.opacity = '1';
+                    backToTopButton.style.transform = 'scale(1)';
+                } else {
+                    backToTopButton.style.opacity = '0';
+                    backToTopButton.style.transform = 'scale(0.8)';
+                }
+            });
+            
+            // Funcionalidade de voltar ao topo
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Efeitos hover
+            backToTopButton.addEventListener('mouseenter', () => {
+                backToTopButton.style.background = 'var(--accent-color)';
+                backToTopButton.style.color = 'var(--primary-bg)';
+                backToTopButton.style.transform = 'scale(1.1)';
+            });
+            
+            backToTopButton.addEventListener('mouseleave', () => {
+                backToTopButton.style.background = 'var(--card-bg)';
+                backToTopButton.style.color = 'var(--accent-color)';
+                backToTopButton.style.transform = 'scale(1)';
+            });
+        }
+        
+        addBackToTop();
+
+        // Adicionar funcionalidade de modo escuro/claro (toggle)
+        function addThemeToggle() {
+            const themeToggle = document.createElement('button');
+            themeToggle.innerHTML = '🌙';
+            themeToggle.title = 'Alternar tema';
+            themeToggle.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--card-bg);
+                color: var(--accent-color);
+                border: 1px solid var(--accent-color);
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                z-index: 1004;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            document.body.appendChild(themeToggle);
+            
+            let isDarkMode = true;
+            
+            themeToggle.addEventListener('click', () => {
+                if (isDarkMode) {
+                    // Modo claro
+                    document.documentElement.style.setProperty('--primary-bg', '#f5f5f5');
+                    document.documentElement.style.setProperty('--card-bg', '#ffffff');
+                    document.documentElement.style.setProperty('--text-primary', '#333333');
+                    document.documentElement.style.setProperty('--text-muted', '#666666');
+                    document.documentElement.style.setProperty('--text-subtle', '#888888');
+                    document.documentElement.style.setProperty('--border-color', 'rgba(0, 0, 0, 0.1)');
+                    themeToggle.innerHTML = '☀️';
+                    isDarkMode = false;
+                } else {
+                    // Modo escuro (padrão)
+                    document.documentElement.style.setProperty('--primary-bg', '#06192a');
+                    document.documentElement.style.setProperty('--card-bg', '#0A243D');
+                    document.documentElement.style.setProperty('--text-primary', '#ffffff');
+                    document.documentElement.style.setProperty('--text-muted', '#cccccc');
+                    document.documentElement.style.setProperty('--text-subtle', '#a0a0a0');
+                    document.documentElement.style.setProperty('--border-color', 'rgba(255, 255, 255, 0.1)');
+                    themeToggle.innerHTML = '🌙';
+                    isDarkMode = true;
+                }
+            });
+        }
+        
+        addThemeToggle();
+
+        // Adicionar indicador de seção atual
+        function addSectionIndicator() {
+            const indicator = document.createElement('div');
+            indicator.style.cssText = `
+                position: fixed;
+                left: 20px;
+                bottom: 20px;
+                background: var(--card-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+                color: var(--text-muted);
+                z-index: 1001;
+                opacity: 0;
+                transition: all 0.3s ease;
+            `;
+            
+            document.body.appendChild(indicator);
+            
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('section');
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        currentSection = section.querySelector('h1, h2').textContent;
+                    }
+                });
+                
+                if (currentSection) {
+                    indicator.textContent = currentSection;
+                    indicator.style.opacity = '1';
+                } else {
+                    indicator.style.opacity = '0';
+                }
+            });
+        }
+        
+        addSectionIndicator();
+
+        // Adicionar funcionalidade de compartilhamento
+        function addShareButton() {
+            if (navigator.share) {
+                const shareButton = document.createElement('button');
+                shareButton.innerHTML = '📤 Compartilhar';
+                shareButton.style.cssText = `
+                    position: fixed;
+                    bottom: 140px;
+                    right: 20px;
+                    background: var(--accent-color);
+                    color: var(--primary-bg);
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 20px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    transition: all 0.3s ease;
+                    z-index: 1001;
+                `;
+                
+                document.body.appendChild(shareButton);
+                
+                shareButton.addEventListener('click', async () => {
+                    try {
+                        await navigator.share({
+                            title: 'Manual 5S - Casa Goianita',
+                            text: 'Manual completo de gestão de estoque com metodologia 5S',
+                            url: window.location.href
+                        });
+                    } catch (err) {
+                        console.log('Erro ao compartilhar:', err);
+                    }
+                });
+            }
+        }
+        
+        addShareButton();
+
+        // Inicializar todas as funcionalidades quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Manual 5S Casa Goianita carregado com sucesso!');
+            
+            // Adicionar efeito de digitação no título principal
+            const mainTitle = document.querySelector('h1');
+            if (mainTitle) {
+                const text = mainTitle.textContent;
+                mainTitle.textContent = '';
+                let i = 0;
+                
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        mainTitle.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                };
+                
+                setTimeout(typeWriter, 500);
+            }
+        });
+
+        // Adicionar funcionalidade de salvar progresso de leitura
+        function saveReadingProgress() {
+            window.addEventListener('scroll', () => {
+                const scrollPercent = (window.pageYOffset / (document.body.offsetHeight - window.innerHeight)) * 100;
+                localStorage.setItem('manual5s_progress', scrollPercent);
+            });
+            
+            // Restaurar progresso ao carregar a página
+            const savedProgress = localStorage.getItem('manual5s_progress');
+            if (savedProgress) {
+                setTimeout(() => {
+                    const targetScroll = (parseFloat(savedProgress) / 100) * (document.body.offsetHeight - window.innerHeight);
+                    window.scrollTo({
+                        top: targetScroll,
+                        behavior: 'smooth'
+                    });
+                }, 1000);
+            }
+        }
+        
+        saveReadingProgress();
+    </script>
+</body>
+</html>
+
