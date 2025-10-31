@@ -127,6 +127,12 @@
             background: linear-gradient(135deg, var(--card-bg) 0%, rgba(255, 107, 53, 0.05) 100%);
         }
 
+        /* Card de IA */
+        .card-ia {
+            border-left: 4px solid #9b59b6;
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(155, 89, 182, 0.05) 100%);
+        }
+
         /* Tipografia */
         h1 {
             font-size: var(--font-size-h1);
@@ -153,6 +159,12 @@
         h4 {
             font-size: 1.3rem;
             color: #ff6b35;
+            margin: var(--space-md) 0 var(--space-sm) 0;
+        }
+
+        h5 {
+            font-size: 1.2rem;
+            color: #9b59b6;
             margin: var(--space-md) 0 var(--space-sm) 0;
         }
 
@@ -200,6 +212,12 @@
         .process-table th {
             background: rgba(255, 107, 53, 0.1);
             color: #ff6b35;
+        }
+
+        /* Tabela de IA */
+        .ia-table th {
+            background: rgba(155, 89, 182, 0.1);
+            color: #9b59b6;
         }
 
         /* Linha do Tempo Vertical */
@@ -281,6 +299,10 @@
             background: #ff6b35;
         }
 
+        .badge-ia {
+            background: #9b59b6;
+        }
+
         .highlight-box {
             background: rgba(0, 232, 0, 0.1);
             border: 1px solid var(--accent-color);
@@ -292,6 +314,11 @@
         .highlight-box-processo {
             background: rgba(255, 107, 53, 0.1);
             border: 1px solid #ff6b35;
+        }
+
+        .highlight-box-ia {
+            background: rgba(155, 89, 182, 0.1);
+            border: 1px solid #9b59b6;
         }
 
         .highlight-box .icon {
@@ -370,9 +397,71 @@
             font-size: 0.9rem;
         }
 
+        /* Correção para listas aninhadas dentro de steps */
+        .process-steps ul {
+            list-style-type: disc;
+            padding-left: 30px;
+            margin-top: var(--space-sm);
+            counter-reset: none; /* Impede que a lista interna continue a contagem */
+        }
+        .process-steps ul li {
+            background: none;
+            border: none;
+            padding: 0 0 var(--space-sm) 0;
+            margin: 0;
+            counter-increment: none; /* Impede incremento do contador */
+            position: relative; /* Garante o alinhamento correto */
+        }
+        .process-steps ul li::before {
+            display: none; /* Remove o número customizado */
+        }
+
+
+        /* Lista de IA */
+        .ia-steps {
+            counter-reset: ia-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .ia-steps li {
+            counter-increment: ia-counter;
+            position: relative;
+            padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-lg);
+            margin-bottom: var(--space-sm);
+            background: rgba(155, 89, 182, 0.05);
+            border-left: 3px solid #9b59b6;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .ia-steps li::before {
+            content: counter(ia-counter);
+            position: absolute;
+            left: var(--space-sm);
+            top: 50%;
+            transform: translateY(-50%);
+            background: #9b59b6;
+            color: var(--primary-bg);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
         /* Seções de Processo */
         .processo-section {
             border-left: 4px solid #ff6b35;
+            padding-left: var(--space-md);
+            margin: var(--space-lg) 0;
+        }
+
+        /* Seções de IA */
+        .ia-section {
+            border-left: 4px solid #9b59b6;
             padding-left: var(--space-md);
             margin: var(--space-lg) 0;
         }
@@ -682,6 +771,13 @@
                 <p>Este processo visa garantir que apenas o material necessário seja adquirido (Seiri) e que seu recebimento e cadastramento sejam padronizados (Seiketsu).</p>
             </div>
 
+            <div class="card" style="border-left: 4px solid #f0ad4e; background: linear-gradient(135deg, var(--card-bg) 0%, rgba(240, 173, 78, 0.05) 100%);">
+                <h3 style="color: #f0ad4e; margin-top: 0; font-size: 1.4rem;">Nota sobre Ferramentas e Custos</h3>
+                <p>As melhorias de automação (como integração com ERP, leitores de código de barras e ferramentas de BI) representam o cenário ideal (Kaizen).</p>
+                <p>Caso a implementação completa não seja viável imediatamente por questões de custo, as funcionalidades podem ser replicadas em ferramentas alternativas (como planilhas avançadas).</p>
+                <p style="color: var(--text-muted); margin-bottom: 0;">Nesses casos, os dados podem ser inseridos manualmente pelo vendedor, estoquista ou gerente, mantendo o fluxo do processo 5S e reduzindo os custos de implantação e manutenção de software.</p>
+            </div>
+
             <div class="processo-section">
                 <h4>A. Senso de Utilização (Seiri) no Planejamento de Compras</h4>
                 
@@ -714,74 +810,204 @@
                     </div>
                 </div>
 
-                <h4>B. Rotina de Cotação e Pedido (O que é Necessário)</h4>
+                <h4>B. Rotina de Cotação e Pedido com Inteligência Artificial (Processo Otimizado)</h4>
                 
-                <div class="card">
-                    <p>O processo de cotação deve ser rigoroso para garantir o menor custo.</p>
-                    
-                    <div class="table-container">
-                        <table class="process-table">
-                            <thead>
-                                <tr>
-                                    <th>Passo</th>
-                                    <th>Detalhamento da Tarefa (Como Implantar)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>4. Cotação de Preços</strong></td>
-                                    <td>
-                                        <strong>Registro Inicial:</strong> Anote os produtos e quantidades desejadas.<br>
-                                        <strong>Múltiplas Fontes:</strong> Realize cotações com múltiplos fornecedores/distribuidores (e-mail, WhatsApp, websites). Isso minimiza o desperdício financeiro.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>5. Fechamento e Autorização</strong></td>
-                                    <td>Confirme o orçamento, verificando preços, prazos e forma de pagamento (à vista, cartão, prazo, duplicata).</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>6. Rodagem do Pedido</strong></td>
-                                    <td>
-                                        <strong>Cadastramento Detalhado:</strong> Digite manualmente o código do produto, quantidade, preço unitário de custo, IPI, e custo interno (ex: 11,5%).<br>
-                                        <strong>Formação do Preço de Venda:</strong> Calcule o preço mínimo aplicando o índice de marcação (ex: 205%). Este processo é vital para a precisão dos preços e para o Seiketsu.
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="card card-ia">
+                    <p>O processo de cotação e "rodagem do pedido" é onde a automação e a inteligência (Kaizen) podem gerar o maior ganho de produtividade e padronização (Seiketsu), transformando a dependência do "feeling" (percepção pessoal) em um processo estruturado e automático, sustentado por dados.</p>
+                </div>
+
+                <div class="ia-section">
+                    <h5>1. Integração de Inteligência na Previsão de Compra (Seiri Otimizado)</h5>
+                    <div class="card">
+                        <p>O Seiri (Senso de Utilização) tem como objetivo garantir que compremos apenas o material necessário. Para isso, precisamos de um alerta automático de demanda, substituindo a dependência da vigilância constante.</p>
+                        
+                        <ol class="ia-steps">
+                            <li>
+                                <strong>Ferramenta de Previsão de Necessidade (O que e quanto comprar)</strong>
+                                <p>Implementar uma ferramenta de Business Intelligence (BI) ou utilizar funcionalidades avançadas no sistema de gestão (ERP) que transformem os dados de vendas históricas em uma previsão de demanda.</p>
+                            </li>
+                            <li>
+                                <strong>Definição e Alimentação do Estoque Mínimo (Seiketsu)</strong>
+                                <p>Utilize o relatório de vendas dos últimos meses por segmento para calcular a média de consumo. Defina o Estoque Mínimo (Estoque Regulador) com base nessa média e cadastre no sistema (cobrindo o prazo de entrega de ~15 dias).</p>
+                            </li>
+                            <li>
+                                <strong>Alerta Automático de Demanda</strong>
+                                <p>O sistema deve ser configurado para gerar um relatório automático ou enviar um alerta (Notificação Push ou E-mail) para o comprador (Curuca) sempre que o estoque de um produto cair abaixo do nível mínimo definido.</p>
+                            </li>
+                            <li>
+                                <strong>Cálculo da Quantidade Sugerida (Previsão)</strong>
+                                <p>A ferramenta de inteligência deve calcular a quantidade ideal a ser pedida, subtraindo o estoque atual e o estoque em trânsito (o que já foi pedido) do estoque máximo desejado.</p>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <h5>2. Otimização da Cotação e Comparação de Preços (Seiri Financeiro)</h5>
+                    <div class="card">
+                        <p>O processo de cotação deve ser rigoroso para minimizar o desperdício financeiro. O comprador frequentemente cota em vários lugares (cinco, seis, ou até mais).</p>
+                        
+                        <div class="highlight-box highlight-box-ia">
+                            <span class="icon">📄</span>
+                            <strong>Termo Técnico (XML):</strong> O XML (eXtensible Markup Language) é um formato de arquivo padrão que permite o transporte de dados de forma estruturada. Receber o orçamento neste formato permite ao sistema absorver os dados (código, quantidade, preço) sem digitação manual.
+                        </div>
+
+                        <ul class="ia-steps">
+                            <li>
+                                <strong>Padronização do Recebimento (XML)</strong>
+                                <p>Oriente os fornecedores a enviar os orçamentos em formato eletrônico (XML ou similar). O sistema de cotação deve permitir a importação desses orçamentos.</p>
+                            </li>
+                            <li>
+                                <strong>Comparação Automática de Orçamentos</strong>
+                                <p>A ferramenta fará a comparação lado a lado, destacando o menor preço para cada item solicitado, eliminando a conferência manual.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h5>3. Geração e "Rodagem" Automática do Pedido (Seiketsu no Custo)</h5>
+                    <div class="card">
+                        <p>O processo de "rodagem do pedido" (cálculo de custos e preço de venda) é complexo e manual. A automação dessa etapa garante a padronização (Seiketsu).</p>
+                        
+                        <ol class="ia-steps">
+                            <li>
+                                <strong>Integração do Pedido</strong>
+                                <p>Uma vez que o comprador autoriza o orçamento selecionado, o sistema deve gerar o Pedido de Compra Interno automaticamente, importando os itens, códigos e o Preço Unitário de Custo do fornecedor (via XML).</p>
+                            </li>
+                            <li>
+                                <strong>Cálculo Automático de Custos e IPI</strong>
+                                <p>A planilha ou módulo de compra deve conter fórmulas fixas. O IPI (Imposto sobre Produtos Industrializados) deve ser puxado do cadastro (NCM). O Custo Interno Fixo (11,5%) deve ser adicionado automaticamente.</p>
+                            </li>
+                            <li>
+                                <strong>Cálculo Automático do Preço de Venda (Markup)</strong>
+                                <p>O sistema aplica o Índice de Marcação (Markup) padrão de 205% sobre o Custo Unitário Final (Custo Base + IPI + Custo Interno). Fórmula: <strong>Preço de Venda = Custo Unitário Final x 205%</strong>.</p>
+                            </li>
+                        </ol>
+                        <p>Essa automação assegura que, ao final da "rodagem do pedido", o preço de custo e o preço de venda mínimo já estejam prontos e padronizados no sistema.</p>
+                    </div>
+
+                    <h5>Resumo das Etapas Otimizadas (Aquisição e Cotação)</h5>
+                    <div class="card">
+                        <div class="table-container">
+                            <table class="ia-table">
+                                <thead>
+                                    <tr>
+                                        <th>Processo</th>
+                                        <th>Passo Otimizado</th>
+                                        <th>Senso 5S</th>
+                                        <th>Benefício Esperado (Kaizen)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Aquisição</strong></td>
+                                        <td>Previsão de Demanda e Alerta de Estoque Mínimo (substituindo o "feeling" por dados)</td>
+                                        <td>Seiri (Utilização)</td>
+                                        <td>Redução de capital imobilizado e minimização de falta de estoque (vendas perdidas).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Cotação</strong></td>
+                                        <td>Comparação Automática de Orçamentos (via importação de XML)</td>
+                                        <td>Seiri (Redução de Desperdício)</td>
+                                        <td>Economia de tempo na negociação e garantia de menor preço.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Rodagem do Pedido</strong></td>
+                                        <td>Cálculo Automático de IPI, Custo Interno e Markup (205%)</td>
+                                        <td>Seiketsu (Padronização)</td>
+                                        <td>Precisão na formação do preço de venda e eliminação de erros manuais.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
-                <h4>C. Recebimento e Conferência (Organização e Limpeza)</h4>
+
+                <h4>C. Recebimento e Conferência Automatizados (Processo Otimizado)</h4>
                 
-                <div class="card">
-                    <p>O recebimento é onde o Seisou (Limpeza/Inspeção) e o Seiton (Ordenação) se encontram, garantindo que o que foi comprado realmente chegou e que não há avarias.</p>
+                <div class="card card-processo">
+                    <p>O processo atual de conferência manual em relatório impresso gera desperdício de tempo e está sujeito a erros. Esta otimização (Kaizen) foca em digitalizar o processo, alinhando-o ao Seisou (inspeção) e Seiketsu (padrão).</p>
+                </div>
+
+                <div class="processo-section">
+                    <h5>Passo 1: Recebimento e Entrada Digital (Otimizando o Seiri)</h5>
+                    <div class="card">
+                        <p>Digitalizar a entrada da Nota Fiscal, substituindo a digitação manual de custos e impostos.</p>
+                        <div class="table-container">
+                            <table class="process-table">
+                                <thead>
+                                    <tr><th>Tarefa Atual (Manual)</th><th>Tarefa Otimizada (Automatizada)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Estoquista/Gestor gera relatório em branco para preenchimento manual.</td>
+                                        <td><strong>Importação do XML da Nota Fiscal:</strong> O sistema recebe o arquivo XML do fornecedor e pré-carrega o pedido esperado.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gestor (Curuca) digita manualmente IPI e custo interno (11,5%) na "Rodagem do Pedido".</td>
+                                        <td><strong>Cálculo Automático de Custos:</strong> A partir do XML, o sistema calcula o Custo Unitário Final, aplicando automaticamente o Custo Interno (11,5%).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="highlight-box highlight-box-processo">
+                            <span class="icon">💡</span>
+                            <strong>Modo de Implantar:</strong> Exigir que fornecedores enviem o XML. O sistema de gestão (ERP) deve usar a funcionalidade de "Importação de XML" para eliminar a digitação manual (redução de desperdício, Seiri).
+                        </div>
+                    </div>
+
+                    <h5>Passo 2: Conferência e Inspeção por Leitor (Kaizen e Seisou)</h5>
+                    <div class="card">
+                        <p>Substituir a contagem e anotação manual por uma conferência digital precisa e rápida.</p>
+                        <div class="table-container">
+                            <table class="process-table">
+                                <thead>
+                                    <tr><th>Tarefa Atual (Manual)</th><th>Tarefa Otimizada (Automatizada)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Estoquista preenche manualmente a quantidade no papel e anota avarias.</td>
+                                        <td><strong>Conferência via Coletor/Leitor de Código de Barras:</strong> O estoquista usa um scanner para ler o código de barras de cada item.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul class="process-steps">
+                            <li>
+                                <strong>Leitura Automática:</strong> O sistema (já alimentado pelo XML) aguarda a conferência. A cada scan, o sistema incrementa a contagem.
+                            </li>
+                            <li>
+                                <strong>Registro Digital de Avarias (Seisou):</strong> No coletor, o estoquista marca o item como "Quebrado" ou "Avaria". O sistema move a quantidade para um status de pendência ou "Ponto Estoque" automaticamente.
+                            </li>
+                            <li>
+                                <strong>Alerta de Divergência:</strong> Se o número lido não bater com o esperado (do XML), o sistema emite um alerta imediato, permitindo a correção no ato.
+                            </li>
+                        </ul>
+                    </div>
                     
-                    <ol class="process-steps">
-                        <li>
-                            <strong>Recebimento Físico e Nota Fiscal</strong>
-                            <p>O estoquista recebe a mercadoria e a nota fiscal do fornecedor.</p>
-                        </li>
-                        <li>
-                            <strong>Geração do Relatório de Entrada</strong>
-                            <p>No sistema, o estoquista abre a tela de entrada de mercadoria, insere o fornecedor e o número da nota fiscal. O sistema gera um relatório com a descrição e referência dos produtos, mas com o campo de quantidade vazio para conferência.</p>
-                        </li>
-                        <li>
-                            <strong>Conferência Física e Relatório</strong>
-                            <p>O estoquista abre as caixas, conta os itens e preenche manualmente a quantidade no relatório impresso.</p>
-                            <div class="highlight-box highlight-box-processo">
-                                <span class="icon">💡</span>
-                                <strong>Recomendação de Melhoria 5S:</strong> A conferência via leitor de código de barras seria mais rápida e menos propensa a erros, otimizando o processo (Kaizen).
-                            </div>
-                        </li>
-                        <li>
-                            <strong>Análise de Avarias (Seisou como Inspeção)</strong>
-                            <p>O estoquista anota no relatório se houve quebras, avarias, faltas ou excessos. Para eletrodomésticos, são testados após a venda. Para taças/porcelana, quebras são frequentes. Este ato de inspecionar é o Seisou.</p>
-                        </li>
-                        <li>
-                            <strong>Conferência Final e Entrada no Estoque</strong>
-                            <p>O relatório manual é passado ao gestor (Curuca), que o confere contra a nota fiscal. Se houver erro, o estoquista deve ser chamado para reconfirmar. A entrada final no sistema é dada pelo gestor, atualizando o estoque.</p>
-                        </li>
-                    </ol>
+                    <h5>Passo 3: Padronização e Localização de Estoque (Seiton e Seiketsu)</h5>
+                    <div class="card">
+                        <p>Para maximizar a eficiência pós-recebimento (Seiton), o sistema deve registrar imediatamente onde o produto foi colocado.</p>
+                        <div class="table-container">
+                            <table class="process-table">
+                                <thead>
+                                    <tr><th>Ação</th><th>Detalhamento da Automação</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Locação de Mercadoria</strong></td>
+                                        <td>Imediatamente após a conferência via scanner, o estoquista deve escanear o código da Localização (prateleira/corredor).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Identificação Visual (Mapeada)</strong></td>
+                                        <td>O sistema armazena a localização. Quando um vendedor consulta o estoque, o sistema informa a localização exata do item no depósito (Localização Mapeada), eliminando o tempo de procura.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="highlight-box highlight-box-processo">
+                            <span class="icon">🏆</span>
+                            <strong>Resultado:</strong> Essa reengenharia enraíza o Senso de Padronização (Seiketsu) e garante que os procedimentos de custo e conferência sejam uniformes e menos dependentes do esforço manual.
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -885,84 +1111,91 @@
             <h2>III. Saída de Estoque (Vendas e Transferências)</h2>
             
             <div class="card card-processo">
-                <p>Este processo descreve como o sistema e a logística lidam com a movimentação da mercadoria, desde a venda até a entrega ou transferência.</p>
+                <p>Este processo descreve como o sistema e a logística lidam com a movimentação da mercadoria, desde a venda até a entrega ou transferência. A automação (Kaizen) é focada em transformar gargalos manuais em processos padronizados (Seiketsu).</p>
             </div>
 
             <div class="processo-section">
-                <h4>A. Venda e Retirada Automática do Estoque</h4>
-                
+                <h4>A. Melhorias na Transferência Interlojas (Foco em Seiton e Shitsuke)</h4>
                 <div class="card">
-                    <div class="table-container">
-                        <table class="process-table">
-                            <thead>
-                                <tr>
-                                    <th>Passo</th>
-                                    <th>Detalhamento da Tarefa (Como Implantar)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>1. Início da Venda e Consulta de Estoque</strong></td>
-                                    <td>O vendedor (com sua senha) abre a tela de vendas (F2). Ao digitar o código do produto e a quantidade, o sistema consulta automaticamente o estoque total da rede (lojas 1, 2 e 4).</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>2. Negociação e Desconto</strong></td>
-                                    <td>O vendedor pode oferecer um desconto padrão de 5% (F5) em condições como pagamento à vista (Pix, débito) ou em grandes volumes (atacado). Se o produto já estiver em oferta, o desconto não se aplica automaticamente.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>3. Finalização da Venda e Cadastro</strong></td>
-                                    <td>O vendedor finaliza a venda (F12). O cliente é cadastrado apenas se solicitar nota eletrônica, devido à resistência anterior a cadastros completos.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>4. Retirada e Conferência</strong></td>
-                                    <td>Após o cliente ir ao caixa, o vendedor separa a mercadoria para conferência e embalagem. O sistema dá baixa no estoque automaticamente após a finalização da venda.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <p>O processo atual de transferência exige que o vendedor ligue para a outra filial para confirmar o estoque, pois o estoque online não é 100% confiável. Essa chamada manual representa um desperdício de tempo (Muda). A automação foca em eliminar a incerteza.</p>
                 </div>
 
-                <h4>B. Movimentação de Estoque: Transferência Interlojas</h4>
-                
+                <h5>1. Padronização e Mapeamento da Localização (Seiton Otimizado)</h5>
                 <div class="card">
-                    <p>Quando um cliente deseja uma quantidade que não está disponível na loja (ex: quer 36, mas só tem 24), é necessário solicitar a transferência.</p>
+                    <p>O maior problema é a desorganização que se reflete na imprecisão do estoque digital. O objetivo é garantir que o sistema (ERP) registre não só <strong>quanto</strong> se tem, mas <strong>onde</strong> está, com 100% de acurácia (o que demanda alta disciplina, Shitsuke).</p>
                     
-                    <ol class="process-steps">
+                    <ul class="process-steps">
                         <li>
-                            <strong>Solicitação e Confirmação (Manual)</strong>
-                            <p>O vendedor liga para a outra filial para confirmar a disponibilidade do estoque, pois o estoque online pode não ser 100% confiável.</p>
+                            <strong>Enraizamento do Seiton Digital (Localização Mapeada)</strong>
+                            <p>Implementar o uso obrigatório dos Coletores de Dados. O estoquista deve escanear o código da prateleira/corredor no momento da entrada e saída do item.</p>
+                            <div class="highlight-box highlight-box-processo">
+                                <span class="icon">📱</span>
+                                <strong>Termo Técnico (Coletor de Dados):</strong> Dispositivo portátil que permite a leitura de códigos de barras, facilitando o inventário e o mapeamento da localização em tempo real.
+                            </div>
                         </li>
                         <li>
-                            <strong>Lançamento da Transferência (Gerente/Estoquista)</strong>
-                            <p>O lançamento é feito no sistema (Menu: Suprimentos > Movimento > Transferência).</p>
-                            <ul>
-                                <li><strong>Registro:</strong> O responsável insere o código do produto, a filial de destino (ex: 1, 2, 4) e a quantidade</li>
-                                <li><strong>Aviso:</strong> O sistema dá baixa no estoque de origem e entrada no estoque de destino imediatamente</li>
-                            </ul>
+                            <strong>Consulta Automática e Confiável</strong>
+                            <p>O vendedor, ao verificar a falta de um produto, acessa o estoque da rede, onde o sistema já deve fornecer a informação do estoque real e mapeado das outras filiais (loja 1, 2 e 4).</p>
+                            <p><strong>Benefício:</strong> Elimina a necessidade de ligar para a outra loja.</p>
                         </li>
-                        <li>
-                            <strong>Logística Física</strong>
-                            <p>O veículo de transporte passa diariamente entre as lojas (85, 135, T4) para recolher e entregar as mercadorias transferidas.</p>
-                        </li>
-                        <li>
-                            <strong>Retirada pelo Cliente</strong>
-                            <p>Se o cliente for buscar a mercadoria transferida em outra filial, o estoquista/gerente da loja de origem imprime um relatório de transferência. O cliente pode ir buscar imediatamente, pois a mercadoria já está separada e o estoque já foi atualizado.</p>
-                        </li>
-                        <li>
-                            <strong>Entregas (Delivery)</strong>
-                            <p>Para entregas (seja por volume grande, por conveniência ou lista de casamento), o vendedor preenche um borderô no sistema (Controle + 1) com informações logísticas (nome do entregador – terceirizado ou da loja, endereço, dados do cliente/presenteado).</p>
-                        </li>
-                    </ol>
+                    </ul>
                 </div>
 
-                <h4>C. Manutenção do Estoque Virtual (Sistema)</h4>
-                
+                <h5>2. Automatizando o Processo de Transferência (Fluxo Seiketsu)</h5>
                 <div class="card">
-                    <p>Embora o processo de entrada e transferência seja manual, garantir a precisão dos dados é um imperativo do Seiketsu.</p>
-                    
-                    <ul>
-                        <li><strong>Correção de Códigos:</strong> O gestor (Curuca) é o responsável por criar novos códigos (ex: para venda unitária de peças de um kit quebrado), garantindo que o produto possa ser vendido e rastreado no sistema</li>
-                        <li><strong>Digitalização e Rastreabilidade:</strong> O controle de todos os pedidos, notas fiscais e avarias é mantido pelo gestor (em arquivos físicos e no sistema), permitindo a rastreabilidade e a resolução de pendências com fornecedores</li>
+                    <p>Transformar a confirmação de disponibilidade em uma Ordem de Transferência automática, disparada pelo vendedor.</p>
+                    <ul class="process-steps">
+                        <li>
+                            <strong>Ordem de Transferência Digital</strong>
+                            <p>Após o vendedor selecionar o item faltante e verificar a disponibilidade (agora confiável), o sistema deve gerar automaticamente um "Pedido de Separação para Transferência".</p>
+                        </li>
+                        <li>
+                            <strong>Notificação Integrada</strong>
+                            <p>O estoquista na loja de origem recebe uma notificação direta no sistema (ou coletor) com a lista dos itens a serem separados e embalados para o carro de transporte.</p>
+                        </li>
+                        <li>
+                            <strong>Geração Automática do Relatório de Retirada</strong>
+                            <p>Para casos em que o cliente vai buscar o produto na outra filial, o sistema deve gerar e-mail ou notificação (em vez de um relatório impresso), que o cliente pode apresentar na loja de destino.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <h4>B. Melhorias no Processo de Venda, Embalagem e Borderô (Foco em Seiketsu e Shitsuke)</h4>
+                <div class="card">
+                    <p>O processo de venda é a saída do estoque e precisa de padronização máxima (Seiketsu) e disciplina (Shitsuke) para evitar erros na baixa automática de estoque.</p>
+                </div>
+
+                <h5>1. Automação da Geração do Borderô de Entrega (Seiketsu e Kaizen)</h5>
+                <div class="card">
+                    <p>O Borderô (Controle + 1) é o documento logístico preenchido pelo vendedor. O objetivo é eliminar a redundância de preenchimento de dados que já estão na venda.</p>
+                    <ul class="process-steps">
+                        <li>
+                            <strong>Preenchimento Automático de Dados de Venda</strong>
+                            <p>Quando o vendedor acessa o borderô (Controle + 1), o sistema deve importar automaticamente os itens comprados e os dados do cliente/presenteado (se cadastrado para a NF-e).</p>
+                        </li>
+                        <li>
+                            <strong>Integração Logística (API)</strong>
+                            <p>Para entregas terceirizadas (ex: empresa Ágil), o sistema deve ter um módulo de integração para enviar automaticamente o endereço e detalhes da entrega para a plataforma logística.</p>
+                            <div class="highlight-box highlight-box-processo">
+                                <span class="icon">🔗</span>
+                                <strong>Termo Técnico (API):</strong> Interface que permite a comunicação entre o sistema de vendas e o software da transportadora, gerando agilidade e número de rastreio (tracking).
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <h5>2. Inspeção Digital e Controle de Quebras (Seisou Otimizado)</h5>
+                <div class="card">
+                    <p>A fase de conferência na embalagem é crítica. O Seisou (Senso de Limpeza/Inspeção) deve ser aplicado aqui para registrar as condições do produto antes da saída.</p>
+                    <ul class="process-steps">
+                        <li>
+                            <strong>Checklist de Qualidade (Digital)</strong>
+                            <p>O vendedor, ao separar a mercadoria, deve usar um tablet ou coletor para registrar o status do item antes de embalar (inspecionado, testado, etc.).</p>
+                        </li>
+                        <li>
+                            <strong>Fluxo de Correção Automático</strong>
+                            <p>Se uma avaria for registrada pelo vendedor, o sistema automaticamente gera uma solicitação de "Ponto Estoque" (para vender com desconto) ou de reposição ao fornecedor, eliminando a anotação manual e a dependência de controle gerencial para pendências de quebras.</p>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -1008,14 +1241,14 @@
                 
                 <div class="value-highlight">
                     <h3>Resultado Final</h3>
-                    <p>Ao detalhar e padronizar cada uma dessas etapas operacionais e de controle, aliando-as aos Sensos do 5S, a organização garante não apenas um estoque limpo, mas um processo de aquisição e venda <strong>ágil, seguro e com custos otimizados</strong>.</p>
+                    <p>Ao detalhar e padronizar cada uma dessas etapas operacionais e de controle, aliando-as aos Sensos do 5S, η organização garante não apenas um estoque limpo, mas um processo de aquisição e venda <strong>ágil, seguro e com custos otimizados</strong>.</p>
                 </div>
             </div>
         </section>
 
         <!-- Seção de Resumo Executivo -->
         <section id="resumo" class="fade-in">
-            <h2>Resumo Executivo: Benefícios do 5S Integrado</h2>
+            <h2>Resumo Executivo: Benefícios do 5S Integrado com IA</h2>
             
             <div class="card">
                 <h3>Benefícios Operacionais Esperados</h3>
@@ -1031,24 +1264,29 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Compras</strong></td>
-                                <td>Redução de compras desnecessárias, melhor negociação de preços, controle de estoque mínimo</td>
-                                <td>Redução de 15% no capital imobilizado em estoque</td>
+                                <td><strong>Compras Inteligentes</strong></td>
+                                <td>Previsão automática de demanda, comparação inteligente de fornecedores, cálculo automático de custos</td>
+                                <td>Redução de 30% no capital imobilizado em estoque, 15% de economia em compras</td>
                             </tr>
                             <tr>
                                 <td><strong>Estoque</strong></td>
                                 <td>Localização rápida de produtos, redução de quebras, otimização do espaço</td>
-                                <td>Tempo de separação reduzido em 50%</td>
+                                <td>Tempo de separação reduzido em 50%, 25% menos produtos em falta</td>
                             </tr>
                             <tr>
                                 <td><strong>Vendas</strong></td>
                                 <td>Maior disponibilidade de produtos, atendimento mais rápido, redução de transferências</td>
-                                <td>Aumento de 20% na satisfação do cliente</td>
+                                <td>Aumento de 20% na satisfação do cliente, 10% no ticket médio</td>
                             </tr>
                             <tr>
                                 <td><strong>Financeiro</strong></td>
                                 <td>Redução de perdas, melhor giro de estoque, otimização do fluxo de caixa</td>
-                                <td>Redução de 25% nas perdas por avarias</td>
+                                <td>Redução de 25% nas perdas por avarias, 20% melhoria no giro</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gestão Inteligente</strong></td>
+                                <td>Decisões baseadas em dados, automatização de processos, redução de erros manuais</td>
+                                <td>90% de precisão nas previsões, 40% redução no tempo de cotação</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1056,42 +1294,95 @@
             </div>
             
             <div class="card">
-                <h3>Cronograma de Implantação</h3>
+                <h3>Cronograma de Implantação Atualizado</h3>
                 
                 <ol class="steps-list">
                     <li>
                         <strong>Semana 1-2: Treinamento e Preparação</strong>
-                        <p>Capacitação da equipe, registro fotográfico da situação atual, definição de responsabilidades</p>
+                        <p>Capacitação da equipe, registro fotográfico da situação atual, definição de responsabilidades, setup da planilha inteligente</p>
                     </li>
                     <li>
-                        <strong>Semana 3-4: Aplicação S1 e S2</strong>
-                        <p>Descarte de itens desnecessários, reorganização do layout, implementação da identificação visual</p>
+                        <strong>Semana 3-4: Aplicação S1 e S2 + IA</strong>
+                        <p>Descarte de itens desnecessários, reorganização do layout, implementação da identificação visual, início do uso da ferramenta de IA</p>
                     </li>
                     <li>
-                        <strong>Semana 5-6: Aplicação S3 e S4</strong>
-                        <p>Estabelecimento de rotinas de limpeza, padronização de processos, criação de procedimentos</p>
+                        <strong>Semana 5-6: Aplicação S3 e S4 + Automação</strong>
+                        <p>Estabelecimento de rotinas de limpeza, padronização de processos, integração completa da planilha com o sistema</p>
                     </li>
                     <li>
-                        <strong>Semana 7-8: Aplicação S5 e Consolidação</strong>
-                        <p>Implementação do sistema de auditoria, início do monitoramento, ajustes finais</p>
+                        <strong>Semana 7-8: Aplicação S5 + Otimização IA</strong>
+                        <p>Implementação do sistema de auditoria, início do monitoramento, ajustes finais na ferramenta de IA</p>
                     </li>
                     <li>
-                        <strong>A partir da Semana 9: Sustentação</strong>
-                        <p>Auditorias semanais, melhorias contínuas, expansão para outras áreas</p>
+                        <strong>A partir da Semana 9: Sustentação e Evolução</strong>
+                        <p>Auditorias semanais, melhorias contínuas, expansão da IA para outras áreas, análise de resultados</p>
                     </li>
                 </ol>
             </div>
 
+            <div class="card card-ia">
+                <h3>Investimento e ROI da Implementação</h3>
+                
+                <div class="table-container">
+                    <table class="ia-table">
+                        <thead>
+                            <tr>
+                                <th>Componente</th>
+                                <th>Investimento</th>
+                                <th>Economia Mensal</th>
+                                <th>ROI (meses)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Planilha Inteligente</strong></td>
+                                <td>R$ 2.000 (desenvolvimento)</td>
+                                <td>R$ 3.500 (redução de erros)</td>
+                                <td>0,6</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Treinamento 5S + IA</strong></td>
+                                <td>R$ 5.000 (consultoria)</td>
+                                <td>R$ 8.000 (eficiência)</td>
+                                <td>0,7</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reorganização Física</strong></td>
+                                <td>R$ 3.000 (materiais)</td>
+                                <td>R$ 2.000 (tempo de busca)</td>
+                                <td>1,5</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total</strong></td>
+                                <td><strong>R$ 10.000</strong></td>
+                                <td><strong>R$ 13.500</strong></td>
+                                <td><strong>0,8</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="highlight-box highlight-box-ia">
+                    <span class="icon">💰</span>
+                    <strong>Retorno Esperado:</strong> O investimento se paga em menos de 1 mês, gerando uma economia anual de R$ 162.000 para a empresa.
+                </div>
+            </div>
+
             <div class="card">
                 <h3>Palavras Finais</h3>
-                <p>Este manual representa mais que um conjunto de procedimentos - é um convite para transformarmos nossa cultura organizacional. Cada colaborador é um agente de mudança, responsável por manter e aprimorar continuamente nosso ambiente de trabalho.</p>
+                <p>Este manual representa mais que um conjunto de procedimentos - é um convite para transformarmos nossa cultura organizacional através da integração entre metodologia 5S e inteligência artificial. Cada colaborador é um agente de mudança, responsável por manter e aprimorar continuamente nosso ambiente de trabalho.</p>
                 
                 <div class="highlight-box">
                     <span class="icon">🎯</span>
-                    <strong>Lembre-se:</strong> O 5S não é um projeto com início, meio e fim. É uma jornada contínua de excelência que beneficia a todos: empresa, colaboradores e clientes.
+                    <strong>Lembre-se:</strong> O 5S integrado com IA não é um projeto com início, meio e fim. É uma jornada contínua de excelência que beneficia a todos: empresa, colaboradores e clientes, potencializada pela tecnologia.
                 </div>
                 
-                <p>Juntos, vamos transformar a Casa Goianita em um exemplo de organização, eficiência e qualidade no varejo de utilidades domésticas.</p>
+                <p>Juntos, vamos transformar a Casa Goianita em um exemplo de organização, eficiência e inovação no varejo de utilidades domésticas, onde a tradição do 5S encontra o futuro da gestão inteligente.</p>
+                
+                <div class="value-highlight">
+                    <h3>Próximos Passos</h3>
+                    <p>Para dar início à implementação, entre em contato com a equipe de consultoria para agendar a primeira reunião de planejamento e setup da planilha inteligente. O futuro da gestão eficiente começa hoje!</p>
+                </div>
             </div>
         </section>
     </main>
@@ -1102,8 +1393,8 @@
              alt="Logo Live Consultoria" class="footer-logo" loading="lazy">
         <p class="footer-text">
             Manual desenvolvido pela Live Consultoria para a Casa Goianita<br>
-            Transformando ambientes de trabalho através da metodologia 5S integrada às operações<br>
-            <strong>Versão 1.0 - 2025</strong>
+            Transformando ambientes de trabalho através da metodologia 5S integrada às operações e IA<br>
+            <strong>Versão 2.0 - 2025</strong>
         </p>
     </footer>
 
@@ -1177,6 +1468,7 @@
         });
 
         // Funcionalidade de impressão
+        /*
         function printManual() {
             window.print();
         }
@@ -1211,6 +1503,7 @@
         });
         
         document.body.appendChild(printButton);
+        */
 
         // Funcionalidade de busca rápida
         function addSearchFunctionality() {
@@ -1503,7 +1796,7 @@
                     try {
                         await navigator.share({
                             title: 'Manual 5S - Casa Goianita',
-                            text: 'Manual completo de gestão de estoque com metodologia 5S',
+                            text: 'Manual completo de gestão de estoque com metodologia 5S e IA',
                             url: window.location.href
                         });
                     } catch (err) {
@@ -1562,4 +1855,6 @@
     </script>
 </body>
 </html>
+
+
 
