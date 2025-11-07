@@ -87,12 +87,13 @@
         }
 
         /* Main Content */
-        main {
+        .content {
             margin-top: 80px;
-            padding: var(--space-md) var(--space-sm);
+            padding: 20px;
             max-width: 1200px;
-            margin-left: auto;
+            margin-left: 30px; /* Margem inicial pequena, ajustada quando sidebar expande */
             margin-right: auto;
+            transition: margin-left 0.3s ease;
         }
 
         /* Componente Card */
@@ -540,11 +541,15 @@
 
         /* Footer */
         footer {
-            background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            padding: var(--space-lg) var(--space-md);
+            height: 30px; /* Altura reduzida */
+            background-color: #333;
+            color: white;
             text-align: center;
-            margin-top: var(--space-xl);
+            line-height: 30px; /* Ajustado para centralizar */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px; /* Tamanho da fonte reduzido para economia de espaço */
         }
 
         .footer-logo {
@@ -557,43 +562,7 @@
             font-size: 0.9rem;
         }
 
-        /* Navegação interna */
-        .nav-menu {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: var(--space-sm);
-            z-index: 999;
-            display: none;
-            max-height: 400px;
-            overflow-y: auto;
-        }
 
-        .nav-menu a {
-            display: block;
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .nav-menu a:hover,
-        .nav-menu a:focus {
-            background: var(--accent-color);
-            color: var(--primary-bg);
-        }
-
-        @media (min-width: 1024px) {
-            .nav-menu {
-                display: block;
-            }
-        }
 
         /* Destaque de valor */
         .value-highlight {
@@ -648,6 +617,35 @@
                 color: black !important;
             }
         }
+
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #f0f0f0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 20px;
+            display: none; /* Inicialmente oculta */
+        }
+        .content {
+            margin-left: 30px; /* Margem inicial pequena, ajustada quando sidebar expande */
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        .expand-btn {
+            position: fixed;
+            left: 0;
+            top: 20px;
+            background-color: #ddd;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .expanded .content {
+            margin-left: 220px;
+        }
     </style>
 </head>
 <body>
@@ -658,19 +656,22 @@
         <div class="header-title">Manual 5S Completo - Casa Goianita</div>
     </header>
 
-    <!-- Navegação Lateral -->
-    <nav class="nav-menu">
-        <a href="#introducao">Introdução</a>
-        <a href="#metodologia">Metodologia</a>
-        <a href="#plano">Plano de execução</a>
-        <a href="#aquisicao">Aquisição</a>
-        <a href="#aplicacao">Aplicação 5S</a>
-        <a href="#saida">Saída de Estoque</a>
-        <a href="#gestao">Gestão</a>
-        <a href="#resumo">Resumo</a>
-    </nav>
+    <button class="expand-btn" onclick="toggleSidebar()">▶</button>
+    <div class="sidebar" id="sidebar">
+        <!-- Navegação Lateral -->
+        <nav class="nav-menu">
+            <a href="#introducao">Introdução</a>
+            <a href="#metodologia">Metodologia</a>
+            <a href="#plano">Plano de execução</a>
+            <a href="#aquisicao">Aquisição</a>
+            <a href="#aplicacao">Aplicação 5S</a>
+            <a href="#saida">Saída de Estoque</a>
+            <a href="#gestao">Gestão</a>
+            <a href="#resumo">Resumo</a>
+        </nav>
+    </div>
 
-    <main>
+    <main class="content" id="content">
         <!-- Seção de Introdução -->
         <section id="introducao" class="fade-in">
             <h1>Manual Completo 5S: Gestão de Estoque Casa Goianita</h1>
@@ -1400,6 +1401,22 @@
     </footer>
 
     <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            const btn = document.querySelector('.expand-btn');
+            
+            if (sidebar.style.display === 'none') {
+                sidebar.style.display = 'block';
+                content.classList.add('expanded');
+                btn.innerHTML = '◀';
+            } else {
+                sidebar.style.display = 'none';
+                content.classList.remove('expanded');
+                btn.innerHTML = '▶';
+            }
+        }
+
         // Intersection Observer para animações
         const observerOptions = {
             threshold: 0.1,
